@@ -47,9 +47,9 @@ public abstract class Filter {
 	}
 
 	private static void fadeIn(byte[] buffer, int length) {
-		double fadeBytes = length;
-		for (int ii = 0; ii < length; ii++) {
-			double fadeMultiple = (double)ii / fadeBytes;
+		double fadeLength = Math.min(length, buffer.length);
+		for (int ii = 0; ii < fadeLength; ii++) {
+			double fadeMultiple = (double)ii / (double)length;
 			buffer[ii] = (byte)((double)buffer[ii] * fadeMultiple);
 		}
 	}

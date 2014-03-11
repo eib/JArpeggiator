@@ -17,6 +17,10 @@ public enum Arpeggio {
 	}
 	
     public List<Pitch> getNotes(Pitch start, int numOctaves) {
+    	return getNotes(start, numOctaves, this.intervals);
+    }
+    
+    public static List<Pitch> getNotes(Pitch start, int numOctaves, int[] intervals) {
         List<Pitch> notes = new ArrayList<Pitch>();
         int ordinal = start.ordinal();
         int ii = 0;

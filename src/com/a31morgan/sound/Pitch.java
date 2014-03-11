@@ -11,7 +11,6 @@ public enum Pitch {
     A6, A6$, B6, C6, C6$, D6, D6$, E6, F6, F6$, G6, G6$,
     A7;
     public static final int SAMPLE_RATE = 16 * 1022; // ~16KHz
-    public static final int MAX_BUFFERED_SECONDS = 1;
     private final byte[] sine;
     private static final double MININUM_FREQUENCY = 55.0; //A1
     public static final float MAX_VOLUME = 127.0f;
@@ -19,7 +18,7 @@ public enum Pitch {
     Pitch() {
     	boolean isRest = this.ordinal() == 0;
     	if (isRest) {
-    		this.sine = new byte[SAMPLE_RATE * MAX_BUFFERED_SECONDS];
+    		this.sine = new byte[SAMPLE_RATE];
     	} else {
         	double sineLength = isRest ? SAMPLE_RATE : getSineLength();
             this.sine = new byte[(int)sineLength * 1000];

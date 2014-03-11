@@ -31,6 +31,7 @@ public class Melody {
 		for (Pitch p : pitches) {
 			notes.add(new Note(p, noteLength));
 		}
+		System.out.println(pitches);
 		this.addAll(notes);
 	}
 

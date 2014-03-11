@@ -16,7 +16,6 @@ public enum Arpeggiator {
 	        if (notes.size() > 1) {
 	        	notes.addAll(Lists.reverse(notes).subList(1, notes.size() - 1));
 	        }
-	        System.out.println(notes);
 	        return notes;
 		}
 	},

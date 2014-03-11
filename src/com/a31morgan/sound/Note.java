@@ -8,7 +8,7 @@ public class Note {
 
 	private Pitch pitch;
 	private Length length;
-	private double fractionRested = 0.2;
+	private double fractionRested = 0.2; //stacatto == higher, legato == smaller
 	
 	public Note(Pitch pitch, Length length) {
 		this.pitch = pitch;
@@ -25,24 +25,20 @@ public class Note {
 	}
 	
 	public int getDurationMillis(double bpm) {
-		return (int)(MILLIS_PER_MIN / bpm * this.length.getFraction());
+		return (int)(MILLIS_PER_MIN / bpm * this.length.fraction);
 	}
 
 	public enum Length {
-		WHOLE(1),
-		HALF(0.05),
-		TRIPLET(0.333),
-		QUARTER(0.25),
-		SIXTEENTH(0.125);
+		WHOLE_NOTE(1),
+		HALF_NOTE(0.05),
+		TRIPLET_NOTE(0.333),
+		QUARTER_NOTE(0.25),
+		EIGHTH_NOTE(0.125);
 		
-		private final double fraction; //of a whole note
+		public double fraction; //of a whole note
 		
 		private Length(double fraction) {
 			this.fraction = fraction;
 		}
-
-		public double getFraction() {
-			return fraction;
-		}
-	}	
+	}
 }
