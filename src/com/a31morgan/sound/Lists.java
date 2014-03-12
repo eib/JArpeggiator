@@ -11,4 +11,12 @@ public class Lists {
 		Collections.reverse(reversed);
 		return reversed;
 	}
+	
+	public static <T> List<T> times(T fillerObject, int numTimes) {
+		List<T> list = new ArrayList<>(numTimes);
+		for (int ii = 0; ii < numTimes; ii++) {
+			list.add(fillerObject);
+		}
+		return list;
+	}
 }

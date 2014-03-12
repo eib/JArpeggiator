@@ -13,10 +13,19 @@ public class FilterOutputStream extends ByteArrayOutputStream {
 
 	@Override
 	public synchronized void write(byte[] data, int start, int length) {
-		byte[] filtered = Arrays.copyOfRange(data, start, length);
+		byte[] filtered = Arrays.copyOfRange(data, start, start +length);
 		for (Filter filter : this.filters) {
-			filtered = filter.applyFilter(filtered, 0, length);	
+			filtered = filter.applyNoteFilter(filtered, 0, length);	
 		}
 		super.write(filtered, 0, filtered.length);
+	}
+
+	@Override
+	public synchronized byte[] toByteArray() {
+		byte[] data = super.toByteArray();
+		for (Filter filter : this.filters) {
+			data = filter.applyStreamFilter(data);
+		}
+		return data;
 	}
 }

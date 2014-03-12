@@ -22,6 +22,10 @@ public class Melody {
 		this.addAll(notes);
 	}
 	
+	public void add(Note note) {
+		this.notes.add(note);
+	}
+	
 	public void addAll(List<Note> notes) {
 		this.notes.addAll(notes);
 	}

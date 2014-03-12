@@ -2,8 +2,15 @@ package com.a31morgan.sound;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 public class Note {
+	public static final Length WHOLE_NOTE = new Length(1);
+	public static final Length HALF_NOTE = new Length(0.5);
+	public static final Length TRIPLET_NOTE = new Length(0.333);
+	public static final Length QUARTER_NOTE = new Length(0.25);
+	public static final Length EIGHTH_NOTE = new Length(0.125);
+	
 	private static final double MILLIS_PER_MIN = 60 * 1000; 
 
 	private Pitch pitch;
@@ -27,18 +34,20 @@ public class Note {
 	public int getDurationMillis(double bpm) {
 		return (int)(MILLIS_PER_MIN / bpm * this.length.fraction);
 	}
+	
+	public List<Note> times(int numRepeats) {
+		return Lists.times(this, numRepeats);
+	}
 
-	public enum Length {
-		WHOLE_NOTE(1),
-		HALF_NOTE(0.05),
-		TRIPLET_NOTE(0.333),
-		QUARTER_NOTE(0.25),
-		EIGHTH_NOTE(0.125);
-		
+	public static class Length {
 		public double fraction; //of a whole note
 		
 		private Length(double fraction) {
 			this.fraction = fraction;
+		}
+		
+		public Length dot() {
+			return new Length(this.fraction * 1.5);
 		}
 	}
 }
