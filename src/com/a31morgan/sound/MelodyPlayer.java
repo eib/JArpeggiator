@@ -3,7 +3,7 @@ package com.a31morgan.sound;
 import static com.a31morgan.sound.Arpeggiator.UP_DOWN;
 import static com.a31morgan.sound.Arpeggio.MAJOR;
 import static com.a31morgan.sound.Arpeggio.MINOR;
-import static com.a31morgan.sound.Note.QUARTER_NOTE;
+import static com.a31morgan.sound.Note.SIXTEENTH_NOTE;
 import static com.a31morgan.sound.Note.WHOLE_NOTE;
 
 import java.io.ByteArrayOutputStream;
@@ -40,14 +40,14 @@ public class MelodyPlayer {
     public static void main(String[] args) throws LineUnavailableException {
         Melody melody = new Melody(129);
         for (int ii = 0; ii < 1; ii++) {
-	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.C3, 3), QUARTER_NOTE);
-	        melody.addAll(UP_DOWN.getArpeggio(MAJOR, Pitch.A3$, 3), QUARTER_NOTE);
-	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.F2, 3), QUARTER_NOTE);
-	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.C3, 3), QUARTER_NOTE);
-	        melody.addAll(UP_DOWN.getArpeggio(MAJOR, Pitch.A3$, 3), QUARTER_NOTE);
-	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.F2, 3), QUARTER_NOTE);
-	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.C3, 3), QUARTER_NOTE);
-	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.C3, 3), QUARTER_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.C3, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MAJOR, Pitch.A3$, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.F2, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.C3, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MAJOR, Pitch.A3$, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.F2, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.C3, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.C3, 3), SIXTEENTH_NOTE);
         }
         melody.addAll(new Note(Pitch.REST, WHOLE_NOTE).times(3));
         

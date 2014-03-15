@@ -10,6 +10,7 @@ public class Note {
 	public static final Length TRIPLET_NOTE = new Length(0.333);
 	public static final Length QUARTER_NOTE = new Length(0.25);
 	public static final Length EIGHTH_NOTE = new Length(0.125);
+	public static final Length SIXTEENTH_NOTE = new Length(0.0625);
 	
 	private static final double MILLIS_PER_MIN = 60 * 1000; 
 
@@ -32,7 +33,7 @@ public class Note {
 	}
 	
 	public int getDurationMillis(double bpm) {
-		return (int)(MILLIS_PER_MIN / bpm * this.length.fraction);
+		return (int)(MILLIS_PER_MIN / bpm * this.length.fraction / QUARTER_NOTE.fraction); // 4/4 Time Signature
 	}
 	
 	public List<Note> times(int numRepeats) {

@@ -10,15 +10,15 @@ import com.a31morgan.sound.Note.Length;
 public class Melody {
 
 	private List<Note> notes;
-	private int bps;
+	private int bpm;
 	
-	public Melody(int bps) {
-		this.bps = bps;
+	public Melody(int bpm) {
+		this.bpm = bpm;
 		this.notes = new ArrayList<>();
 	}
 
-	public Melody(int bps, List<Note> notes) {
-		this(bps);
+	public Melody(int bpm, List<Note> notes) {
+		this(bpm);
 		this.addAll(notes);
 	}
 	
@@ -39,17 +39,17 @@ public class Melody {
 		this.addAll(notes);
 	}
 
-	public int getBps() {
-		return bps;
+	public int getBpm() {
+		return bpm;
 	}
 
-	public void setBps(int bps) {
-		this.bps = bps;
+	public void setBpm(int bpm) {
+		this.bpm = bpm;
 	}
 
 	public void writeData(OutputStream os) throws IOException {
 		for (Note note : this.notes) {
-			note.writeData(this.bps, os);
+			note.writeData(this.bpm, os);
 		}
 	}
 }
