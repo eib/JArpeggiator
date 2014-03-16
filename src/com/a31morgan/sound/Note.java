@@ -40,6 +40,11 @@ public class Note {
 		return Lists.times(this, numRepeats);
 	}
 
+	@Override
+	public String toString() {
+		return this.pitch.toString();
+	}
+
 	public static class Length {
 		public double fraction; //of a whole note
 		

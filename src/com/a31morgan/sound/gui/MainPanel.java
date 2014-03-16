@@ -4,8 +4,8 @@ import static com.a31morgan.sound.Arpeggio.MINOR;
 import static com.a31morgan.sound.Note.SIXTEENTH_NOTE;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -48,9 +48,12 @@ public class MainPanel extends JPanel {
 		this.add(this.megaButton, BorderLayout.CENTER);
 	}
 	
-	public void updateMelody() {
-		Melody melody = getMelody();
-		this.player.setMelody(melody);
+	public void playMelody() {
+		this.player.play(getMelody());
+	}
+	
+	public void pauseMelody() {
+		this.player.pause();
 	}
 	
 	public Melody getMelody() {
@@ -86,10 +89,14 @@ public class MainPanel extends JPanel {
 	}
 	
 	private void bindActions() {
-		this.megaButton.addActionListener(new ActionListener() {			
+		this.megaButton.addMouseListener(new MouseAdapter() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				updateMelody();
+			public void mousePressed(MouseEvent e) {
+				playMelody();
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				pauseMelody();
 			}
 		});
 	}

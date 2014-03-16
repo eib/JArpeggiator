@@ -13,7 +13,7 @@ import com.a31morgan.sound.FilterOutputStream;
 import com.a31morgan.sound.Melody;
 import com.a31morgan.sound.Pitch;
 
-public class Player {
+public class Player implements IPlayer {
 	private Filter[] filters;
 	private SourceDataLine line;
 	private AudioFormat format;
@@ -31,8 +31,9 @@ public class Player {
         		}),
 		};
 	}
-	
-	public void open() {
+
+	@Override
+	public void start() {
 		try {
 			this.line.open(this.format, (int)format.getSampleRate());
 			this.line.start();
@@ -40,7 +41,8 @@ public class Player {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
+	@Override
 	public void play(Melody melody) {
 		ByteArrayOutputStream os = new FilterOutputStream(this.filters);
 		try {
@@ -52,8 +54,14 @@ public class Player {
 		this.line.write(data, 0, data.length);
 		this.line.drain();
 	}
+
+	@Override
+	public void pause() {
+		line.close();
+	}
 	
-	public void close() {
+	@Override
+	public void stop() {
 		line.close();
 		line = null;
 	}

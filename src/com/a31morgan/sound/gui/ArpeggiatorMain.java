@@ -20,7 +20,7 @@ public class ArpeggiatorMain {
 
 	public static void main(String[] args) throws Exception {
     	AudioFormat format = new AudioFormat(Pitch.SAMPLE_RATE, 8, 1, true, true);
-    	final BackgroundPlayer player = new BackgroundPlayer(new Player(format));
+    	final IPlayer player = new BackgroundPlayer(new Player(format));
     	
 		JFrame frame = new JFrame("JArpeggiator");
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -30,11 +30,11 @@ public class ArpeggiatorMain {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
-				new Thread(player).start();
+				player.start();
 			}
 			@Override
 			public void windowClosing(WindowEvent e) {
-				player.close();
+				player.stop();
 			}
 		});
 		frame.setVisible(true);

@@ -35,7 +35,6 @@ public class Melody {
 		for (Pitch p : pitches) {
 			notes.add(new Note(p, noteLength));
 		}
-		System.out.println(pitches);
 		this.addAll(notes);
 	}
 
@@ -51,5 +50,10 @@ public class Melody {
 		for (Note note : this.notes) {
 			note.writeData(this.bpm, os);
 		}
+	}
+
+	@Override
+	public String toString() {
+		return this.notes.toString();
 	}
 }

@@ -5,25 +5,25 @@ import com.a31morgan.sound.Melody;
 
 public class BackgroundPlayer implements Runnable, IPlayer {
 	
-	private final Player player;
+	private final IPlayer player;
 	private final Object threadLock = new Object();
 	private Melody nextMelody = null; //"null" means "REST"
 	private boolean isClosed = false;
 	
-	public BackgroundPlayer(Player player) {
+	public BackgroundPlayer(IPlayer player) {
 		this.player = player;
 	}
 
 	@Override
 	public void run() {
-		player.open();
+		player.start();
 		try {
 			while (!isClosed()) {
 				waitForNextMelody();
 				playNextMelody();
 			}
 		} finally {
-			player.close();
+			player.stop();
 		}
 	}
 	
@@ -40,10 +40,14 @@ public class BackgroundPlayer implements Runnable, IPlayer {
 	}
 	
 	private void playNextMelody() {
+		Melody melody = null;
 		synchronized (threadLock) {
-			if (!isClosed() && hasNextMelody()) {
-				this.player.play(this.nextMelody);
+			if (!isClosed()) {
+				melody = this.nextMelody;
 			}
+		}
+		if (melody != null) {
+			this.player.play(this.nextMelody);
 		}
 	}
 	
@@ -56,9 +60,21 @@ public class BackgroundPlayer implements Runnable, IPlayer {
 	}
 	
 	/* Can be called from a different thread. */
+
+	private void setNextMelody(Melody melody) {
+		synchronized (threadLock) {
+			this.nextMelody = melody;
+			threadLock.notify();
+		}
+	}
 	
 	@Override
-	public void close() {
+	public void start() {
+		new Thread(this, "Background Player").start();
+	}
+	
+	@Override
+	public void stop() {
 		synchronized (threadLock) {
 			this.isClosed = true;
 			threadLock.notify();
@@ -66,10 +82,13 @@ public class BackgroundPlayer implements Runnable, IPlayer {
 	}
 
 	@Override
-	public void setMelody(Melody nextMelody) {
-		synchronized (threadLock) {
-			this.nextMelody = nextMelody;
-			threadLock.notify();
-		}
+	public void play(Melody melody) {
+		setNextMelody(melody);
+	}
+
+	@Override
+	public void pause() {
+		setNextMelody(null);
+		//TODO: stop player here???????
 	}
 }

@@ -4,8 +4,12 @@ import com.a31morgan.sound.Melody;
 
 public interface IPlayer {
 
-	public void close();
+	public void start();
+	
+	public void play(Melody melody);
+	
+	public void pause();
 
-	public void setMelody(Melody melody);
+	public void stop();
 
 }
