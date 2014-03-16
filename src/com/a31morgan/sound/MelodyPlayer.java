@@ -40,14 +40,14 @@ public class MelodyPlayer {
     public static void main(String[] args) throws LineUnavailableException {
         Melody melody = new Melody(129);
         for (int ii = 0; ii < 1; ii++) {
-	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.C3, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.C4, 3), SIXTEENTH_NOTE);
 	        melody.addAll(UP_DOWN.getArpeggio(MAJOR, Pitch.A3$, 3), SIXTEENTH_NOTE);
-	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.F2, 3), SIXTEENTH_NOTE);
-	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.C3, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.F3, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.C4, 3), SIXTEENTH_NOTE);
 	        melody.addAll(UP_DOWN.getArpeggio(MAJOR, Pitch.A3$, 3), SIXTEENTH_NOTE);
-	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.F2, 3), SIXTEENTH_NOTE);
-	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.C3, 3), SIXTEENTH_NOTE);
-	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.C3, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.F3, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.C4, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.C4, 3), SIXTEENTH_NOTE);
         }
         melody.addAll(new Note(Pitch.REST, WHOLE_NOTE).times(3));
         
