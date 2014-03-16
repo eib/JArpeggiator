@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public enum Arpeggio {
-	MAJOR(new int[] { 4, 3, 5 }),
-	MINOR(new int[] { 3, 4, 5 }),
-	DIMINISHED(new int[] { 3, 3, 4, 2 }),
-	AUGMENTED(new int[] { 4, 4, 4 });
+public class Arpeggio {
+	public static final Arpeggio MAJOR = new Arpeggio(new int[] { 4, 3, 5 });
+	public static final Arpeggio MINOR = new Arpeggio(new int[] { 3, 4, 5 });
+	public static final Arpeggio DIMINISHED = new Arpeggio(new int[] { 3, 3, 4, 2 });
+	public static final Arpeggio AUGMENTED = new Arpeggio(new int[] { 4, 4, 4 });
 	
 	private int[] intervals;
 	
-	private Arpeggio(int[] intervals) {
+	public Arpeggio(int[] intervals) {
 		this.intervals = intervals;
 	}
 	
     public List<Pitch> getNotes(Pitch start, int numOctaves) {
     	return getNotes(start, numOctaves, this.intervals);
     }
-    
+        
     public static List<Pitch> getNotes(Pitch start, int numOctaves, int[] intervals) {
         List<Pitch> notes = new ArrayList<Pitch>();
         int ordinal = start.ordinal();

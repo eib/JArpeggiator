@@ -48,6 +48,17 @@ public class MelodyPlayer {
 	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.F3, 3), SIXTEENTH_NOTE);
 	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.C4, 3), SIXTEENTH_NOTE);
 	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.C4, 3), SIXTEENTH_NOTE);
+	        //Chorus Progression:
+	        melody.addAll(UP_DOWN.getArpeggio(MAJOR, Pitch.C4, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.A3, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(new Arpeggio(new int[] {5, 4, 3}), Pitch.G3, 3), SIXTEENTH_NOTE); //C Major Chord 2nd Inversion, G (+5) C (+4) E (+3)
+	        melody.addAll(UP_DOWN.getArpeggio(new Arpeggio(new int[] {5, 4, 3}), Pitch.G3, 3), SIXTEENTH_NOTE); //C Major Chord 2nd Inversion, G (+5) C (+4) E (+3)
+	        melody.addAll(UP_DOWN.getArpeggio(MAJOR, Pitch.C4, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.A3, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MAJOR, Pitch.E3, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MAJOR, Pitch.E3, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.F3, 3), SIXTEENTH_NOTE);
+	        melody.addAll(UP_DOWN.getArpeggio(MINOR, Pitch.F3, 3), SIXTEENTH_NOTE);	        
         }
         melody.addAll(new Note(Pitch.REST, WHOLE_NOTE).times(3));
         
