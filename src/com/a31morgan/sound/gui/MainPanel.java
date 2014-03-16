@@ -4,6 +4,8 @@ import static com.a31morgan.sound.Arpeggio.MINOR;
 import static com.a31morgan.sound.Note.SIXTEENTH_NOTE;
 
 import java.awt.BorderLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -26,6 +28,7 @@ public class MainPanel extends JPanel {
 	private final JSlider tempoSlider;
 	private final JComboBox<Arpeggiator> arpeggiatorComboBox;
 	private final JButton megaButton;
+	private Pitch startingPitch;
 	
 	public MainPanel(IPlayer player) {
 			super(new BorderLayout(3, 3));
@@ -38,6 +41,7 @@ public class MainPanel extends JPanel {
 					Arpeggiator.DOWN_UP,
 			});
 			this.megaButton = new JButton("Play!");
+			this.startingPitch = Pitch.C4;
 			layoutComponents();
 			bindActions();
 	}
@@ -81,7 +85,7 @@ public class MainPanel extends JPanel {
 	}
 	
 	public Pitch getStartingPitch() {
-		return Pitch.C3;
+		return startingPitch;
 	}
 	
 	public int getNumOctaves() {
@@ -89,10 +93,32 @@ public class MainPanel extends JPanel {
 	}
 	
 	private void bindActions() {
+		this.megaButton.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				pauseMelody();
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				Pitch newPitch = KeyboardLayout.keyToPitch(e);
+				if (newPitch != Pitch.REST) {
+					startingPitch = newPitch;
+					playMelody();
+				}
+			}
+		});
 		this.megaButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				playMelody();
+				pauseMelody();
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {

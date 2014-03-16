@@ -9,7 +9,9 @@ public enum Pitch {
     A4, A4$, B4, C4, C4$, D4, D4$, E4, F4, F4$, G4, G4$,
     A5, A5$, B5, C5, C5$, D5, D5$, E5, F5, F5$, G5, G5$,
     A6, A6$, B6, C6, C6$, D6, D6$, E6, F6, F6$, G6, G6$,
-    A7;
+    A7, A7$, B7, C7, C7$, D7, D7$, E7, F7, F7$, G7, G7$,
+    A8, A8$, B8, C8, C8$, D8, D8$, E8, F8, F8$, G8, G8$,
+    A9;
     public static final int SAMPLE_RATE = 16 * 1022; // ~16KHz
     private final byte[] sine;
     private static final double MININUM_FREQUENCY = 55.0; //A1
