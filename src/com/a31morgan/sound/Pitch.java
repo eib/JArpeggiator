@@ -12,28 +12,29 @@ public enum Pitch {
     C7, C7$, D7, D7$, E7, F7, F7$, G7, G7$, A7, A7$, B7,
     C8, C8$, D8, D8$, E8, F8, F8$, G8, G8$, A8, A8$, B8,
     C9;
+    
+    public static final int INTERVALS_PER_OCTAVE = 12;
     public static final int SAMPLE_RATE = 16 * 1022; // ~16KHz
-    private final byte[] sine;
+    
     private static final double MININUM_FREQUENCY = 32.7032; //C1
-    public static final float MAX_VOLUME = 127.0f;
-
-    Pitch() {
-    	boolean isRest = this.ordinal() == 0;
-    	if (isRest) {
-    		this.sine = new byte[SAMPLE_RATE];
+    
+    public Pitch increment(int interval) {
+    	int ordinal = this.ordinal() + interval;
+    	Pitch[] allPitches = Pitch.values();
+    	if (0 <= ordinal && ordinal < allPitches.length) {
+        	return allPitches[ordinal];
     	} else {
-        	double sineLength = isRest ? SAMPLE_RATE : getSineLength();
-            this.sine = new byte[(int)sineLength * 1000];
-            for (int ii = 0; ii < sine.length; ii++) {
-                double angle = 2.0 * Math.PI * ii / sineLength;
-                sine[ii] = (byte)(Math.sin(angle) * MAX_VOLUME);
-            }
+    		return null;
     	}
+    }
+    
+    public boolean isRest() {
+    	return this.ordinal() == 0;
     }
     
     public double getFrequency() {
     	double frequency = 1.0;
-    	if (this.ordinal() > 0) { //"not REST"
+    	if (!this.isRest()) {
             double exp = ((double)this.ordinal() - 1) / 12.0;
             return MININUM_FREQUENCY * Math.pow(2.0, exp);
     	}
@@ -45,14 +46,10 @@ public enum Pitch {
     }
     
     /**
-     * @return The length of the period.
+     * @return The length of the sine curve in samples.
+     * 	Corresponds to a single second.
      */
-    public double getSineLength() {
-        return (double)SAMPLE_RATE * getPeriod();
-    }
-    
-    public byte[] getData(int millis) {
-        int length = Pitch.SAMPLE_RATE * millis / 1000;
-    	return ArrayUtils.repeatToLength(this.sine, length);
+    public double getSineLength(double sampleRate) {
+        return sampleRate * getPeriod();
     }
 }

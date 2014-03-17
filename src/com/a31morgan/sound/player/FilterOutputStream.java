@@ -1,4 +1,4 @@
-package com.a31morgan.sound;
+package com.a31morgan.sound.player;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Arrays;

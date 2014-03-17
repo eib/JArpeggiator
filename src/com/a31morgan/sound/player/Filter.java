@@ -1,7 +1,10 @@
-package com.a31morgan.sound;
+package com.a31morgan.sound.player;
 
 import java.util.Arrays;
 import java.util.Random;
+
+import com.a31morgan.sound.Pitch;
+import com.a31morgan.sound.utils.ArrayUtils;
 
 public abstract class Filter {
 	
@@ -138,7 +141,7 @@ public abstract class Filter {
 	
 	/* Filter helper (static) methods */
 	
-	protected static byte[] applyEcho(byte[] input, double volumeFraction, int offsetLength) {
+	public static byte[] applyEcho(byte[] input, double volumeFraction, int offsetLength) {
 		byte[] output = new byte[input.length];
 		offsetLength = Math.min(offsetLength, input.length);
 		for (int ii = 0; ii < offsetLength; ii++) {

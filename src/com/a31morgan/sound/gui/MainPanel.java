@@ -19,6 +19,7 @@ import com.a31morgan.sound.Arpeggiator;
 import com.a31morgan.sound.Arpeggio;
 import com.a31morgan.sound.Melody;
 import com.a31morgan.sound.Note.Length;
+import com.a31morgan.sound.player.IPlayer;
 import com.a31morgan.sound.Pitch;
 
 @SuppressWarnings("serial")
@@ -29,16 +30,17 @@ public class MainPanel extends JPanel {
 	private final JComboBox<Arpeggiator> arpeggiatorComboBox;
 	private final JButton megaButton;
 	private Pitch startingPitch;
+	private KeyboardLayout keyboard = KeyboardLayout.getDefaultLayout();
 	
 	public MainPanel(IPlayer player) {
 			super(new BorderLayout(3, 3));
 			this.player = player;
 			this.tempoSlider = new JSlider(60, 216, 129);
 			this.arpeggiatorComboBox = new JComboBox<>(new Arpeggiator[] {
-					Arpeggiator.UP,
-					Arpeggiator.DOWN,
 					Arpeggiator.UP_DOWN,
 					Arpeggiator.DOWN_UP,
+					Arpeggiator.UP,
+					Arpeggiator.DOWN,
 			});
 			this.megaButton = new JButton("Play!");
 			this.startingPitch = Pitch.C4;
@@ -73,7 +75,7 @@ public class MainPanel extends JPanel {
 
 	public List<Pitch> getPitches() {
 		Arpeggiator arpeggiator = getArpeggiator();
-        return arpeggiator.getArpeggio(getArpeggio(), getStartingPitch(), getNumOctaves());
+        return arpeggiator.listArpeggio(getArpeggio(), getStartingPitch(), getNumOctaves());
 	}
 	
 	public Arpeggiator getArpeggiator() {
@@ -94,11 +96,10 @@ public class MainPanel extends JPanel {
 	
 	private void bindActions() {
 		this.megaButton.addKeyListener(new KeyListener() {
-			
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
+				int interval = keyboard.getPitchOffsetInterval(e);
+				keyboard.setOffsetPitch(interval);
 			}
 			
 			@Override
@@ -108,7 +109,11 @@ public class MainPanel extends JPanel {
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
-				Pitch newPitch = KeyboardLayout.keyToPitch(e);
+				System.out.println("Key code: " + e.getKeyCode());
+				int interval = keyboard.getPitchOffsetInterval(e);
+				keyboard.setOffsetPitch(interval);
+				
+				Pitch newPitch = keyboard.keyToPitch(e);
 				if (newPitch != Pitch.REST) {
 					startingPitch = newPitch;
 					playMelody();

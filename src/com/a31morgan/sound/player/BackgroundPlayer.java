@@ -1,4 +1,4 @@
-package com.a31morgan.sound.gui;
+package com.a31morgan.sound.player;
 
 import com.a31morgan.sound.Melody;
 
@@ -27,7 +27,7 @@ public class BackgroundPlayer implements Runnable, IPlayer {
 		}
 	}
 	
-	private void waitForNextMelody() {
+	protected void waitForNextMelody() {
 		synchronized (threadLock) {
 			while (!isClosed() && !hasNextMelody()) {
 				try {
@@ -39,7 +39,7 @@ public class BackgroundPlayer implements Runnable, IPlayer {
 		}
 	}
 	
-	private void playNextMelody() {
+	protected void playNextMelody() {
 		Melody melody = null;
 		synchronized (threadLock) {
 			if (!isClosed()) {
@@ -51,17 +51,17 @@ public class BackgroundPlayer implements Runnable, IPlayer {
 		}
 	}
 	
-	private boolean isClosed() {
+	protected boolean isClosed() {
 		return this.isClosed;
 	}
 	
-	private boolean hasNextMelody() {
+	protected boolean hasNextMelody() {
 		return this.nextMelody != null;
 	}
 	
 	/* Can be called from a different thread. */
 
-	private void setNextMelody(Melody melody) {
+	protected void setNextMelody(Melody melody) {
 		synchronized (threadLock) {
 			this.nextMelody = melody;
 			threadLock.notify();

@@ -1,7 +1,5 @@
 package com.a31morgan.sound;
 
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,18 +36,16 @@ public class Melody {
 		this.addAll(notes);
 	}
 
+	public List<Note> getNotes() {
+		return notes;
+	}
+
 	public int getBpm() {
 		return bpm;
 	}
 
 	public void setBpm(int bpm) {
 		this.bpm = bpm;
-	}
-
-	public void writeData(OutputStream os) throws IOException {
-		for (Note note : this.notes) {
-			note.writeData(this.bpm, os);
-		}
 	}
 
 	@Override

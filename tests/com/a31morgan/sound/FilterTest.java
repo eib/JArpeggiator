@@ -4,6 +4,8 @@ import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 
+import com.a31morgan.sound.player.Filter;
+
 public class FilterTest {
 	
 	@Test

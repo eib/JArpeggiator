@@ -1,4 +1,4 @@
-package com.a31morgan.sound;
+package com.a31morgan.sound.utils;
 
 
 public class ArrayUtils {

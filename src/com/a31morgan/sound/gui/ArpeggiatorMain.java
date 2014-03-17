@@ -9,6 +9,9 @@ import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
 import com.a31morgan.sound.Pitch;
+import com.a31morgan.sound.player.BackgroundPlayer;
+import com.a31morgan.sound.player.IPlayer;
+import com.a31morgan.sound.player.Player;
 
 public class ArpeggiatorMain {
 	

@@ -7,7 +7,6 @@ import java.util.Map;
 import com.a31morgan.sound.Pitch;
 
 public class KeyboardLayout {
-
 	private static final Map<Integer, Pitch> isomorphicLayout;
 	
 	static {
@@ -46,11 +45,56 @@ public class KeyboardLayout {
 		isomorphicLayout.put(KeyEvent.VK_OPEN_BRACKET, Pitch.F5);
 	}
 	
-	public static Pitch keyToPitch(KeyEvent e) {
+	private final Map<Integer, Pitch> layout;
+	private int pitchOffsetInterval = 0;
+	
+	protected KeyboardLayout(Map<Integer, Pitch> layout) {
+		this.layout = layout;
+	}
+
+	public Pitch keyToPitch(KeyEvent e) {
 		Pitch newPitch = isomorphicLayout.get(e.getKeyCode());
+		if (newPitch != null) {
+			newPitch = newPitch.increment(this.pitchOffsetInterval);
+		}
 		if (newPitch == null) {
 			newPitch = Pitch.REST;
 		}
 		return newPitch;
+	}
+	
+	public void setOffsetPitch(int interval) {
+		this.pitchOffsetInterval += interval;
+	}
+	
+	public void resetOffsetPitch() {
+		this.pitchOffsetInterval = 0;
+	}
+	
+	int getPitchOffsetInterval(KeyEvent e) {
+		int interval = 0;
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_UP:
+		case KeyEvent.VK_KP_UP:
+			interval = Pitch.INTERVALS_PER_OCTAVE;
+			break;
+		case KeyEvent.VK_DOWN:
+		case KeyEvent.VK_KP_DOWN:
+			interval = -Pitch.INTERVALS_PER_OCTAVE;
+			break;
+		case KeyEvent.VK_LEFT:
+		case KeyEvent.VK_KP_LEFT:
+			interval = -1;
+			break;
+		case KeyEvent.VK_RIGHT:
+		case KeyEvent.VK_KP_RIGHT:
+			interval = 1;
+			break;
+		}
+		return interval;
+	}
+
+	public static KeyboardLayout getDefaultLayout() {
+		return new KeyboardLayout(isomorphicLayout);
 	}
 }

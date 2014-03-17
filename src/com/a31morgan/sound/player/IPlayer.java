@@ -1,4 +1,4 @@
-package com.a31morgan.sound.gui;
+package com.a31morgan.sound.player;
 
 import com.a31morgan.sound.Melody;
 
