@@ -1,5 +1,6 @@
 package com.a31morgan.sound;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public enum Arpeggiator {
@@ -14,7 +15,8 @@ public enum Arpeggiator {
 		@Override
 		public List<Pitch> getNotes(List<Pitch> notes) {
 	        if (notes.size() > 1) {
-	        	notes.addAll(Lists.reverse(notes).subList(1, notes.size() - 1));
+	        	List<Pitch> down = Lists.reverse(notes).subList(1, notes.size() - 1); //excludes low pitch (starting note)
+	        	notes.addAll(down);
 	        }
 	        return notes;
 		}
@@ -23,8 +25,11 @@ public enum Arpeggiator {
 		@Override
 		public List<Pitch> getNotes(List<Pitch> notes) {
 			if (notes.size() > 1) {
-				notes.addAll(Lists.reverse(notes).subList(1, notes.size()));
-				notes = Lists.reverse(notes).subList(0, notes.size() - 1);
+				List<Pitch> down = Lists.reverse(notes); //includes low pitch (at the end)
+				List<Pitch> up = notes.subList(1, notes.size() - 1); //excludes low pitch (at the beginning) and high pitch (at the end)
+				notes = new ArrayList<Pitch>();
+				notes.addAll(down);
+				notes.addAll(up);
 			}
 			return notes;
 		}
