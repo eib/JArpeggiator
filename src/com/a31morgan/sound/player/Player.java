@@ -17,17 +17,17 @@ import com.a31morgan.sound.utils.ArrayUtils;
 public class Player implements IPlayer {
     public static final double MAX_VOLUME = 127.0;
     
-	private Filter[] filters;
+	private IFilter[] filters;
 	private SourceDataLine line;
 	private AudioFormat format;
 
-	public Player(AudioFormat format, Filter... filters) throws LineUnavailableException {
+	public Player(AudioFormat format, IFilter... filters) throws LineUnavailableException {
 		this.line = AudioSystem.getSourceDataLine(format);
 		this.format = format;
 		this.filters = filters;
 	}
     
-    public static void play(Melody melody, AudioFormat format, Filter... filters) throws LineUnavailableException {
+    public static void play(Melody melody, AudioFormat format, IFilter... filters) throws LineUnavailableException {
     	try (CloseablePlayer player = new CloseablePlayer(format, filters)) {
     		player.play(melody);
     	}
@@ -104,7 +104,7 @@ public class Player implements IPlayer {
 }
 
 class CloseablePlayer extends Player implements AutoCloseable {
-	public CloseablePlayer(AudioFormat format, Filter... filters) throws LineUnavailableException {
+	public CloseablePlayer(AudioFormat format, IFilter... filters) throws LineUnavailableException {
 		super(format, filters);
 		this.start();
 	}

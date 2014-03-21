@@ -1,13 +1,20 @@
-package com.a31morgan.sound;
+package com.a31morgan.sound.demos;
 
-import static com.a31morgan.sound.Arpeggiator.*;
-import static com.a31morgan.sound.Arpeggio.*;
-import static com.a31morgan.sound.Note.*;
+import static com.a31morgan.sound.Arpeggiator.UP_DOWN;
+import static com.a31morgan.sound.Arpeggio.MAJOR;
+import static com.a31morgan.sound.Arpeggio.MINOR;
+import static com.a31morgan.sound.Note.SIXTEENTH_NOTE;
+import static com.a31morgan.sound.Note.WHOLE_NOTE;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.LineUnavailableException;
 
+import com.a31morgan.sound.Arpeggio;
+import com.a31morgan.sound.Melody;
+import com.a31morgan.sound.Note;
+import com.a31morgan.sound.Pitch;
 import com.a31morgan.sound.player.Filter;
+import com.a31morgan.sound.player.IFilter;
 import com.a31morgan.sound.player.Player;
 
 public class Bliss {
@@ -45,11 +52,10 @@ public class Bliss {
 //	        melody.addAll(DOWN.getArpeggio(MINOR, Pitch.D6, 3), SIXTEENTH_NOTE);
 	        //http://takkaria.org/sheets/muse-ss-chorus1.pdf
 	        //http://www.youtube.com/watch?v=GaNYUtoEevo   you're welcome ;)
-	        
         }
         melody.addAll(new Note(Pitch.REST, WHOLE_NOTE).times(2));
         
-        Filter[] filters = {
+        IFilter[] filters = {
         		Filter.createScaleFilter(0.7),
         		Filter.createFadeInOutFilter(3, Pitch.SAMPLE_RATE),
         		Filter.createMultiEchoFilter(new double[] { //in fractions

@@ -1,11 +1,9 @@
 
 
 * UP/DOWN stop working after switch from DOWN_UP/UP_DOWN.
-* DOWN_UP is backwards (write a unit-test!)
 * "double" is much less lossy when compared to "byte".
 	TODO: let the Pitches and the Filters work on double[]s.
 	TODO: less Array copyOfRange.
 	TODO: filter actual streams (not byte[]s)... this would make [Multi]EchoFilter work across multiple Melodies. 
 * work out the gap between BackgroundPlayer's wait/notify :(
 * Actually Arpeggiate the keys pressed.
-* Translate the current pitch up/down/left/right.

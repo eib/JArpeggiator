@@ -5,12 +5,14 @@ import static org.junit.Assert.assertArrayEquals;
 import org.junit.Test;
 
 import com.a31morgan.sound.player.Filter;
+import com.a31morgan.sound.player.IFilter;
+import com.a31morgan.sound.utils.ArrayUtils;
 
 public class FilterTest {
 	
 	@Test
 	public void testCreateMultiEchoFilter() {
-		Filter f = Filter.createMultiEchoFilter(new double[] { 1, 2, 3 }, new int[] { 1, 2, 3 });
+		IFilter f = Filter.createMultiEchoFilter(new double[] { 1, 2, 3 }, new int[] { 1, 2, 3 });
 		byte[] input = {
 				1, 0, 0, 0, 0,
 				0, 0, 0, 0, 0,
@@ -19,8 +21,9 @@ public class FilterTest {
 				1, 1, 2, 5, 3,
 				6, 6, 0, 0, 0,
 				};
-		byte[] actual = f.applyStreamFilter(input);
-		assertArrayEquals(expected, actual);
+		byte[] output = ArrayUtils.copyOf(input);
+		f.applyStreamFilter(output);
+		assertArrayEquals(expected, output);
 	}
 
 	@Test
@@ -33,8 +36,9 @@ public class FilterTest {
 				2, 4, 6, 8, 10,
 				1, 2, 3, 4, 5,
 				};
-		byte[] actual = Filter.applyEcho(input, 0.5, 5);
-		assertArrayEquals(expected, actual);
+		byte[] output = ArrayUtils.copyOf(input);
+		Filter.applyEcho(output, 0.5, 5);
+		assertArrayEquals(expected, output);
 	}
 
 	@Test
@@ -45,8 +49,9 @@ public class FilterTest {
 		byte[] expected = {
 				1, 2, 3
 				};
-		byte[] actual = Filter.applyEcho(input, 0.5, 50);
-		assertArrayEquals(expected, actual);
+		byte[] output = ArrayUtils.copyOf(input);
+		Filter.applyEcho(output, 0.5, 50);
+		assertArrayEquals(expected, output);
 	}
 
 	@Test
@@ -59,8 +64,9 @@ public class FilterTest {
 				1, 2, 3, 4, 5,
 				8, 16, 24, 32, 40,
 				};
-		byte[] actual = Filter.applyEcho(input, 7.0, 5);
-		assertArrayEquals(expected, actual);
+		byte[] output = ArrayUtils.copyOf(input);
+		Filter.applyEcho(output, 7.0, 5);
+		assertArrayEquals(expected, output);
 	}
 
 	@Test
@@ -79,8 +85,9 @@ public class FilterTest {
 				25, 27, 29, 31, 33,
 				35,
 				};
-		byte[] actual = Filter.applyEcho(input, 1.0, 5);
-		assertArrayEquals(expected, actual);
+		byte[] output = ArrayUtils.copyOf(input);
+		Filter.applyEcho(output, 1.0, 5);
+		assertArrayEquals(expected, output);
 	}
 
 	@Test
@@ -93,8 +100,9 @@ public class FilterTest {
 				1, 2, 3, 4, 5,
 				1, 2, 3, 4, 5,
 				};
-		byte[] actual = Filter.applyEcho(input, 1.0, 5);
-		assertArrayEquals(expected, actual);
+		byte[] output = ArrayUtils.copyOf(input);
+		Filter.applyEcho(output, 1.0, 5);
+		assertArrayEquals(expected, output);
 	}
 	
 	@Test
@@ -107,8 +115,9 @@ public class FilterTest {
 				2, 4, 6, 8, 10,
 				4, 8, 12, 16, 20,
 				};
-		byte[] actual = Filter.applyEcho(input, 2.0, 5);
-		assertArrayEquals(expected, actual);
+		byte[] output = ArrayUtils.copyOf(input);
+		Filter.applyEcho(output, 2.0, 5);
+		assertArrayEquals(expected, output);
 	}
 	
 	@Test
@@ -121,8 +130,9 @@ public class FilterTest {
 				123, 124, 125, 126, 127,
 				Byte.MAX_VALUE, Byte.MAX_VALUE, Byte.MAX_VALUE, Byte.MAX_VALUE, Byte.MAX_VALUE,
 				};
-		byte[] actual = Filter.applyEcho(input, 2.0, 5);
-		assertArrayEquals(expected, actual);
+		byte[] output = ArrayUtils.copyOf(input);
+		Filter.applyEcho(output, 2.0, 5);
+		assertArrayEquals(expected, output);
 	}
 	
 	@Test
@@ -135,7 +145,8 @@ public class FilterTest {
 				123, 124, 125, 126, 127,
 				Byte.MIN_VALUE, Byte.MIN_VALUE, Byte.MIN_VALUE, Byte.MIN_VALUE, Byte.MIN_VALUE,
 				};
-		byte[] actual = Filter.applyEcho(input, -2.0, 5);
-		assertArrayEquals(expected, actual);
+		byte[] output = ArrayUtils.copyOf(input);
+		Filter.applyEcho(output, -2.0, 5);
+		assertArrayEquals(expected, output);
 	}
 }

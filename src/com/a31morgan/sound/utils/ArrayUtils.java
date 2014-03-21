@@ -1,7 +1,13 @@
 package com.a31morgan.sound.utils;
 
+import java.util.Arrays;
+
 
 public class ArrayUtils {
+	
+	public static byte[] copyOf(byte[] input) {
+		return Arrays.copyOf(input, input.length);
+	}
 
 	public static byte[] repeatToLength(byte[] data, int length) {
 		if (length == 0) {
