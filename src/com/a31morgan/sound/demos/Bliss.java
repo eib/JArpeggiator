@@ -13,6 +13,7 @@ import com.a31morgan.sound.Arpeggio;
 import com.a31morgan.sound.Melody;
 import com.a31morgan.sound.Note;
 import com.a31morgan.sound.Pitch;
+import com.a31morgan.sound.player.EchoFilter;
 import com.a31morgan.sound.player.Filter;
 import com.a31morgan.sound.player.IFilter;
 import com.a31morgan.sound.player.Player;
@@ -43,22 +44,13 @@ public class Bliss {
 	        melody.addAll(UP_DOWN.listArpeggio(MAJOR, Pitch.E3, 3), SIXTEENTH_NOTE);
 	        melody.addAll(UP_DOWN.listArpeggio(MINOR, Pitch.F3, 3), SIXTEENTH_NOTE);
 	        melody.addAll(UP_DOWN.listArpeggio(MINOR, Pitch.F3, 3), SIXTEENTH_NOTE);
-	        
-	        
-	        //Stockholm Syndrome Chorus Progression:															
-//	        melody.addAll(UP.getArpeggio(new Arpeggio(new int[] {4, 3, 5, -8,}), Pitch.F3, 3), SIXTEENTH_NOTE); //These are going to be tricky, it goes back to the second note of the arpeggio
-//	        melody.addAll(UP.getArpeggio(new Arpeggio(new int[] {4, 3, 5, -8,}), Pitch.E3, 3), SIXTEENTH_NOTE); //A Major Chord 2nd Inversion, E (+5) A (+4) C$(+3)
-//	        melody.addAll(DOWN.getArpeggio(MINOR, Pitch.D7, 3), SIXTEENTH_NOTE); 
-//	        melody.addAll(DOWN.getArpeggio(MINOR, Pitch.D6, 3), SIXTEENTH_NOTE);
-	        //http://takkaria.org/sheets/muse-ss-chorus1.pdf
-	        //http://www.youtube.com/watch?v=GaNYUtoEevo   you're welcome ;)
         }
         melody.addAll(new Note(Pitch.REST, WHOLE_NOTE).times(2));
         
         IFilter[] filters = {
-        		Filter.createScaleFilter(0.7),
-        		Filter.createFadeInOutFilter(3, Pitch.SAMPLE_RATE),
-        		Filter.createMultiEchoFilter(new double[] { //in fractions
+        		Filter.createScaleFilter(0.6),
+        		Filter.createFadeInOutFilter(5, Pitch.SAMPLE_RATE),
+        		EchoFilter.createMultiEchoFilter(new double[] { //in fractions
         			0.5, 0.4, 0.2, 0.1, 0.05,
         		}, new int[] { //frames
         			1500, 3000, 8000, 12000, 14000,
